@@ -9,17 +9,30 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@reduxjs/toolkit": "^2.4.0",
+    "@sanity/block-content-to-react": "^3.0.0",
+    "axios": "^1.7.9",
+    "framer-motion": "^11.14.0",
+    "next": "15.1.0",
+    "next-sanity": "^9.8.25",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
-    "next": "15.1.0"
+    "react-hook-form": "^7.54.0",
+    "react-icons": "^5.4.0",
+    "react-query": "^3.39.3",
+    "react-redux": "^9.1.2",
+    "react-slideshow-image": "^4.3.2",
+    "redux-persist": "^6.0.0",
+    "sanity": "^3.67.0",
+    "styled-components": "^6.1.13"
   },
   "devDependencies": {
-    "typescript": "^5",
+    "@eslint/eslintrc": "^3",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "eslint": "^9",
     "eslint-config-next": "15.1.0",
-    "@eslint/eslintrc": "^3"
+    "typescript": "^5"
   }
 }

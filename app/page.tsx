@@ -34,6 +34,7 @@ export default function Home() {
           {item.map((v: itemType, k: number) => (
             <Card
               key={k}
+              id={v.id}
               title={v.title}
               img={v.image}
               link="/"

@@ -13,7 +13,7 @@ const persistConfig = {
 };
 
 const combinered = combineReducers({
-  [slice.name]: slice,
+  cart: slice,
 });
 
 const reducer = persistReducer(persistConfig, combinered);

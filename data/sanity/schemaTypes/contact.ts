@@ -2,7 +2,7 @@ import {defineField, defineType} from 'sanity'
 
 export default defineType({
   name: 'contact',
-  title: 'Contact',
+  title: 'Settings',
   type: 'document',
   fields: [
     defineField({
@@ -76,6 +76,42 @@ export default defineType({
       title: 'Body',
       type: 'blockContent',
     }),
+
+
+
+
+
+
+    defineField({
+      name: 'dollar',
+      title: 'Dollar Rate',
+      type: 'string',
+    }),
+    defineField({
+      name: 'pounds',
+      title: 'Pounds Rate',
+      type: 'string',
+    }),
+    defineField({
+      name: 'euros',
+      title: 'Euros Rate',
+      type: 'string',
+    })
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   ],
 
  

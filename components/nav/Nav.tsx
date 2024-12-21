@@ -3,7 +3,6 @@
 import useGetQuery from '@/data/query/useGetQuery';
 import Image from 'next/image';
 import Link from 'next/link';
-import { IoCartOutline } from 'react-icons/io5';
 import { FaFacebook } from 'react-icons/fa';
 import { FaXTwitter } from 'react-icons/fa6';
 import { FaInstagram } from 'react-icons/fa';
@@ -11,6 +10,7 @@ import { FaPhoneAlt } from 'react-icons/fa';
 import { MdOutlineEmail } from 'react-icons/md';
 import { usePathname } from 'next/navigation';
 import { useEffect,useState } from 'react';
+import Cart from './Cart'
 
 const Nav = () => {
   const [toggle,setToggle] = useState('hide')
@@ -121,7 +121,7 @@ const Nav = () => {
             </div>
 
             <div className="cart-bx">
-              <IoCartOutline />
+            <Cart />
             </div>
 
             <div className="mobile-contact-box">

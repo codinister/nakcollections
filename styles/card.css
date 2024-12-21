@@ -42,7 +42,11 @@
     }
 
 }
-    button {
+
+
+
+
+    .enabled-btn {
       background-color: #332a2b;
       padding-block: 0.8rem;
       padding-inline: 1.6rem;
@@ -55,6 +59,21 @@
         background-color: var(--warning);
       }
     }
+
+
+    .disabled-btn {
+      border: solid .1rem #ccc;
+      padding-block: 0.8rem;
+      padding-inline: 1.6rem;
+      border-radius: 1.6rem;
+      color: #ccc;
+    }
+
+
+
+
+
+
   }
 
   & > h4 {

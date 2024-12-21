@@ -2,22 +2,26 @@
 
 import { createSlice } from '@reduxjs/toolkit';
 
-const initialState = {
-  cart: [],
+type initialStateType = {
+  total: string;
+  cart: object;
 };
 
-type sliceType = {
-  cart: string[];
+const initialState: initialStateType = {
+  total: '4',
+  cart: {
+    ['37a-f235-46fb-bbec-431a5cd0ec23'] : {}
+  },
 };
 
-type payloadType = { payload: string };
+
 
 const slice = createSlice({
   initialState,
   name: 'cart',
   reducers: {
-    addToCart(state: sliceType, { payload }: payloadType) {
-      state?.cart.push(payload);
+    addToCart(state,  payload ) {
+      state.total = payload.payload;
     },
   },
 });

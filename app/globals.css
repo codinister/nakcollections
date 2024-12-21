@@ -40,6 +40,11 @@ h3 {
   line-height: 2.3rem;
 }
 
+h4 {
+  font-size: 2rem;
+  line-height: 2.3rem;
+}
+
 @media (min-width: 35em) {
   .container {
     padding-inline: 6.4rem;
@@ -48,3 +53,5 @@ h3 {
 
 @import '@/styles/nav';
 @import '@/styles/footer';
+@import '@/styles/home';
+@import '@/styles/card';

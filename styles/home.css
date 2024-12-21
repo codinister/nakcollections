@@ -1,0 +1,16 @@
+.home {
+  & > .item-wrapper {
+    margin-block: 6.4rem;
+    h2 {
+      margin-bottom: 2.4rem;
+    }
+    & > div {
+      display: flex;
+      gap: 3.2rem;
+      flex-wrap: wrap;
+      & > div {
+        flex: 1 1 20rem;
+      }
+    }
+  }
+}

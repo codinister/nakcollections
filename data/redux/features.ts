@@ -8,24 +8,30 @@ type initialStateType = {
 };
 
 const initialState: initialStateType = {
-  total: '4',
-  cart: {
-    ['37a-f235-46fb-bbec-431a5cd0ec23'] : {}
-  },
+  total: '0',
+  cart: {},
 };
-
-
 
 const slice = createSlice({
   initialState,
   name: 'cart',
   reducers: {
-    addToCart(state,  payload ) {
-      state.total = payload.payload;
+    addToCart(state, payload) {
+      state.cart = { ...state.cart, ...payload.payload };
+
+      state.total = Object.values(state.cart).reduce((a, b) => {
+        return Number(b.price) + Number(a);
+      }, 0);
+    },
+    deleteCart(state, payload) {
+      state.cart = { ...payload.payload };
+      state.total = Object.values(state.cart).reduce((a, b) => {
+        return Number(b.price) + Number(a);
+      }, 0);
     },
   },
 });
 
 export default slice.reducer;
 
-export const { addToCart } = slice.actions;
+export const { addToCart, deleteCart } = slice.actions;

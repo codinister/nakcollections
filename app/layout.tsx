@@ -1,14 +1,14 @@
-import type { Metadata } from "next";
-import "./globals.css";
-import QryProvider from "@/data/query/QryProvider";
-import StoreProvider from "@/data/redux/StoreProvider";
-import Nav from "@/components/nav/Nav";
-import Footer from "@/components/footer/Footer";
-
+import type { Metadata } from 'next';
+import './globals.css';
+import QryProvider from '@/data/query/QryProvider';
+import StoreProvider from '@/data/redux/StoreProvider';
+import Nav from '@/components/nav/Nav';
+import Footer from '@/components/footer/Footer';
+import Currency from '@/components/Currency';
 
 export const metadata: Metadata = {
-  title: "NAK COLLECTIONS",
-  description: "African ware",
+  title: 'NAK COLLECTIONS',
+  description: 'African ware',
 };
 
 export default function RootLayout({
@@ -20,11 +20,12 @@ export default function RootLayout({
     <html lang="en">
       <body>
         <StoreProvider>
-        <QryProvider>
-          <Nav />
-        {children}
-        <Footer />
-        </QryProvider>
+          <QryProvider>
+            <Nav />
+            {children}
+            <Footer />
+            <Currency />
+          </QryProvider>
         </StoreProvider>
       </body>
     </html>

@@ -4,6 +4,7 @@ const useSelectors = () => {
     cart: {
       total: string;
       cart: object;
+      currency: string;
     };
   };
 

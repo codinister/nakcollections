@@ -5,6 +5,7 @@ import useSelectors from '@/data/redux/useSelectors';
 import Image from 'next/image';
 import { IoCartOutline } from 'react-icons/io5';
 import { useDispatch } from 'react-redux';
+import format_number from '@/utils/format_number';
 
 const Cart = () => {
   const obj = useSelectors();
@@ -34,28 +35,34 @@ const Cart = () => {
 
       {val > 0 ? (
         <div className="cart-list">
-          <table>
-            <tbody>
-              {data.map((v, k) => (
-                <tr key={k}>
-                  <td>
-                    <Image src={v.img} alt="" width="40" height="40" />
-                  </td>
-                  <td>
-                    {v.title}
-                    <br />
-                    {v.price}
-                  </td>
-                  <td>
-                    <span onClick={() => handleClick(v.id)}>X</span>
-                  </td>
-                </tr>
-              ))}
-              <tr>
-                <td>{total}</td>
-              </tr>
-            </tbody>
-          </table>
+
+
+          <div>
+            <table>
+              <tbody>
+                {data.map((v, k) => (
+                  <tr key={k}>
+                    <td>
+                      <Image src={v.img} alt="" width="50" height="50" />
+                    </td>
+                    <td>
+                      {v.title}
+                      <br />
+                      {v.price}
+                    </td>
+                    <td>
+                      <span onClick={() => handleClick(v.id)}>X</span>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+
+          <div>
+            <div>TOTA GHs {format_number(total)}</div>
+            <button>GO TO CHECKOUT</button>
+          </div>
         </div>
       ) : (
         ''

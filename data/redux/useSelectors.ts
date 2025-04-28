@@ -5,6 +5,8 @@ const useSelectors = () => {
       total: string;
       cart: object;
       currency: string;
+      size: string;
+      lastwatched: object;
     };
   };
 

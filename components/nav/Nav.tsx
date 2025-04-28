@@ -9,11 +9,13 @@ import { FaInstagram } from 'react-icons/fa';
 import { FaPhoneAlt } from 'react-icons/fa';
 import { MdOutlineEmail } from 'react-icons/md';
 import { usePathname } from 'next/navigation';
-import { useEffect,useState } from 'react';
-import Cart from './Cart'
+import { useEffect, useState } from 'react';
+import Cart from './Cart';
+import { MdOutlineShoppingBag } from 'react-icons/md';
+import Searchbox from '../Searchbox';
 
 const Nav = () => {
-  const [toggle,setToggle] = useState('hide')
+  const [toggle, setToggle] = useState('hide');
   useEffect(() => {
     window.addEventListener('scroll', staticnav);
     return () => window.removeEventListener('scroll', staticnav);
@@ -38,13 +40,13 @@ const Nav = () => {
       <section className="topbar">
         <div className="container">
           <div>
-            <a href={cont[0]?.facebook}>
+            <a target="_blank" href={cont[0]?.facebook}>
               <FaFacebook />
             </a>
-            <a href={cont[0]?.twitter}>
+            <a target="_blank" href={cont[0]?.twitter}>
               <FaXTwitter />
             </a>
-            <a href={cont[0]?.instagram}>
+            <a target="_blank" href={cont[0]?.instagram}>
               <FaInstagram />
             </a>
           </div>
@@ -66,62 +68,45 @@ const Nav = () => {
           width="40"
           height="40"
           className="hamburger"
-          onClick={()=> setToggle('show')}
+          onClick={() => setToggle('show')}
         />
 
         <div className={`container nav-box1 ${toggle}`}>
           <div>
             {cont[0] ? (
-              <Image
-                src={cont[0]?.comp_logo}
-                alt="logo"
-                width="70"
-                height="70"
-              />
+              <Link href="/">
+                <Image
+                  src={cont[0]?.comp_logo}
+                  alt="logo"
+                  width="70"
+                  height="70"
+                />
+              </Link>
             ) : (
               ''
             )}
           </div>
 
           <div>
-            <div>
-              <ul>
-                <li>
-                  <Link href="/" onClick={()=> setToggle('hide')} className={path === '/' ? 'active' : ''}>
-                    Home
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    href="/shop"
-                    onClick={()=> setToggle('hide')}
-                    className={path === '/shop' ? 'active' : ''}
-                  >
-                    Shop
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    href="/terms"
-                    onClick={()=> setToggle('hide')}
-                    className={path === '/terms' ? 'active' : ''}
-                  >
-                    Terms & Condition
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    href="/contact"
-                    className={path === '/contact' ? 'active' : ''}
-                  >
-                    Contact
-                  </Link>
-                </li>
-              </ul>
-            </div>
+            <Searchbox />
+          </div>
 
-            <div className="cart-bx">
-            <Cart />
+          <div>
+            <div>
+              <Link
+                href="/shop?p=1"
+                onClick={() => setToggle('hide')}
+                className={path === '/shop' ? 'active' : ''}
+              >
+                <MdOutlineShoppingBag />
+                Shop
+              </Link>
+            </div>
+            <div className="cart-bxu">
+              <span>
+                <Cart />
+              </span>{' '}
+              <span>Cart</span>
             </div>
 
             <div className="mobile-contact-box">
@@ -148,7 +133,10 @@ const Nav = () => {
             </div>
           </div>
         </div>
-        <div className={`container nav-box2 ${toggle}`} onClick={()=> setToggle('hide')}></div>
+        <div
+          className={`container nav-box2 ${toggle}`}
+          onClick={() => setToggle('hide')}
+        ></div>
       </nav>
     </section>
   );

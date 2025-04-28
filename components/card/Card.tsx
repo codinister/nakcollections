@@ -4,9 +4,8 @@ import format_number from '@/utils/format_number';
 import { useRouter } from 'next/navigation';
 import { useDispatch } from 'react-redux';
 import { addToCart } from '@/data/redux/features';
+import useGetCurrency from '@/utils/useGetCurrency';
 import useSelectors from '@/data/redux/useSelectors';
-import useGetQuery from '@/data/query/useGetQuery';
-
 
 type CardType = {
   id: string;
@@ -17,30 +16,10 @@ type CardType = {
 };
 
 const Card = ({ title, img, link, price, id }: CardType) => {
+
   const dispatch = useDispatch();
-  const cont = useGetQuery('/contact', 'contact') || [];
-
   const obj = useSelectors();
-
-
-  let curr = 'GH₵'
-  let item_price = Number(price)
-
-  if(obj.currency === 'dollar'){
-    curr = '$'
-    item_price = Number(price) / Number(cont[0]?.dollar)
-  }
-  else if(obj.currency === 'euro'){
-    curr = '€'
-    item_price = Number(price) / Number(cont[0]?.euros)
-  }
-  else if(obj.currency === 'pounds'){
-    curr = '£'
-    item_price = Number(price) / Number(cont[0]?.pounds)
-  }
-
-
-
+  const { curr, item_price } = useGetCurrency(price);
 
   const btn = Object.keys(obj.cart).includes(id);
 
@@ -52,10 +31,11 @@ const Card = ({ title, img, link, price, id }: CardType) => {
         link,
         price,
         id,
+        qty: 1, 
+        total: Number(price)
       },
     };
     dispatch(addToCart(bj));
-
   };
 
   const BtnEnabled = () => {
@@ -69,21 +49,20 @@ const Card = ({ title, img, link, price, id }: CardType) => {
   const BtnDisabled = () => {
     return (
       <button className="disabled-btn" onClick={handleClick}>
-        Add to cart
+      Add to cart
       </button>
     );
   };
 
   const router = useRouter();
 
-  const subt = title.length < 30 ? title : title.slice(0, 5) + '...';
+  const subt = Number(title?.length) < 30 ? title : title.slice(0, 5) + '...';
 
-const res = item_price.toString()
+  const res = item_price.toString();
 
   return (
     <div className="card">
       <div
-        onClick={() => router.push(link)}
         style={{
           backgroundImage: `url(${img})`,
           backgroundSize: 'cover',
@@ -91,14 +70,17 @@ const res = item_price.toString()
         }}
       >
         {' '}
-        <div></div>
+        <div onClick={() => router.push(link)}></div>
       </div>
 
       <h4 title={title}>{subt}</h4>
-
+      
       <div>
         <div>
-          <h4>{curr}{format_number(res)}</h4>
+          <h4>
+            {curr}
+            {format_number(res)}
+          </h4>
         </div>
         <div>{btn ? <BtnDisabled /> : <BtnEnabled />}</div>
       </div>

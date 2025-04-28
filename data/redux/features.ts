@@ -4,27 +4,44 @@ import { createSlice } from '@reduxjs/toolkit';
 
 type initialStateType = {
   total: string;
+  discount: string; 
+  delivery: string;
   cart: object;
   currency: string;
+  size: string;
+  lastwatched: object;
 };
 
 const initialState: initialStateType = {
   total: '0',
+  discount: '0',
+  delivery: '0',
   cart: {},
-  currency: 'cedi'
+  currency: 'cedi',
+  size: '',
+  lastwatched: {}
 };
 
 const slice = createSlice({
   initialState,
   name: 'cart',
   reducers: {
+    setSize(state,payload){
+      state.size = payload.payload
+    },
+
     addToCart(state, payload) {
       state.cart = { ...state.cart, ...payload.payload };
 
       state.total = Object.values(state.cart).reduce((a, b) => {
-        return Number(b.price) + Number(a);
+        return Number(b.total) + Number(a);
       }, 0);
     },
+    addLastwatched(state, payload) {
+      state.lastwatched = { ...state.lastwatched, ...payload.payload };
+    },
+
+
     deleteCart(state, payload) {
       state.cart = { ...payload.payload };
       state.total = Object.values(state.cart).reduce((a, b) => {
@@ -39,4 +56,4 @@ const slice = createSlice({
 
 export default slice.reducer;
 
-export const { addToCart, deleteCart, setCurrency } = slice.actions;
+export const { addToCart, deleteCart, setCurrency,setSize,addLastwatched } = slice.actions;

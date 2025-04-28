@@ -1,18 +1,21 @@
 'use client';
 
 import { setCurrency } from '@/data/redux/features';
-import { useState } from 'react';
+import useSelectors from '@/data/redux/useSelectors';
+
 import { useDispatch } from 'react-redux';
 
 const Currency = () => {
-  const [cur, setCur] = useState('cedi');
+
   const dispatch = useDispatch();
 
   const handlechange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
-    setCur(value);
     dispatch(setCurrency(value));
   };
+
+    const details = useSelectors()
+    const cur = details?.currency
 
   return (
     <div className="currency">
@@ -36,6 +39,7 @@ const Currency = () => {
           </label>
           <input
             id="dollar"
+            checked={cur === 'dollar' ? true : false}
             onChange={handlechange}
             value="dollar"
             type="radio"
@@ -48,6 +52,7 @@ const Currency = () => {
           </label>
           <input
             id="pounds"
+            checked={cur === 'pounds' ? true : false}
             onChange={handlechange}
             value="pounds"
             type="radio"
@@ -60,6 +65,7 @@ const Currency = () => {
           </label>
           <input
             id="euro"
+            checked={cur === 'euro' ? true : false}
             onChange={handlechange}
             value="euro"
             type="radio"

@@ -13,6 +13,7 @@ export async function GET() {
             "id": _id,
             title,
             price,
+            'createdAt': _createdAt,
             "image": image.asset->url,
             excerpt,
             "desc": body[]{

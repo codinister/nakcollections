@@ -4,7 +4,7 @@
 }
 :root {
   font-size: 62.5%;
-  --warning: #e5b62c;
+  --warning: #ef7f1b;
   --white: #fff;
   --muted: #332a2b;
 }
@@ -57,3 +57,8 @@ h4 {
 @import '@/styles/card';
 @import '@/styles/cart';
 @import '@/styles/currency';
+@import '@/styles/shop';
+@import '@/styles/single';
+@import '@/styles/gallery';
+@import '@/styles/checkout';
+@import '@/styles/input';

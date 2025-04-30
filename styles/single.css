@@ -28,6 +28,12 @@
   }
 }
 
+.item-warning{
+  color: red;
+  padding: 1.2rem; 
+  font-size: 1.2rem;
+}
+
 .last-watched {
   margin-bottom: 5.6rem;
   h3 {

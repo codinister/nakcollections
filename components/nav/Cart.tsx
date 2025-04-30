@@ -97,7 +97,7 @@ const Cart = () => {
 
           <div>
             <div>
-              <strong>TOTAL</strong>:{cur} {format_number(gtotal.toString())}
+              <strong>TOTAL</strong>:{cur} {gtotal}
             </div>
             <button onClick={()=> router.push('/checkout')}>GO TO CHECKOUT</button>
           </div>

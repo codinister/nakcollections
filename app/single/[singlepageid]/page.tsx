@@ -9,19 +9,27 @@ import useSelectors from '@/data/redux/useSelectors';
 import { useParams } from 'next/navigation';
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
+import { useRouter } from 'next/navigation';
 
 const Singlepage = () => {
   const item: ItemTypes = useGetQuery('item', '/item') || [];
   const bestselling: ItemTypes =
-  useGetQuery('bestselling', '/bestselling') || [];
+    useGetQuery('bestselling', '/bestselling') || [];
 
-  const obj = [...item,...bestselling] 
+  const obj = [...item, ...bestselling];
 
   const params = useParams();
+  const router = useRouter();
 
   const id = params?.singlepageid;
 
   const filta = Object.values(obj).filter((v) => v.id === id);
+
+  useEffect(() => {
+    if (filta.length < 1) {
+      router.push('/');
+    }
+  }, []);
 
   const dispatch = useDispatch();
 

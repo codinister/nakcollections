@@ -17,10 +17,10 @@ type CardType = {
 
 const Card = ({ title, img, link, price, id }: CardType) => {
 
+
   const dispatch = useDispatch();
   const obj = useSelectors();
   const { curr, item_price } = useGetCurrency(price);
-
   const btn = Object.keys(obj.cart).includes(id);
 
   const handleClick = () => {
@@ -32,7 +32,8 @@ const Card = ({ title, img, link, price, id }: CardType) => {
         price,
         id,
         qty: 1, 
-        total: Number(price)
+        total: Number(price),
+        size: ''
       },
     };
     dispatch(addToCart(bj));

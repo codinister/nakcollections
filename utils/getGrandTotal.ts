@@ -21,6 +21,7 @@ const getGrandTotal = (
 
   const grand_total = format_number(String(grandtotal));
 
+
   return { curr, grand_total };
 };
 

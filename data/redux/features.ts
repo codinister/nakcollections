@@ -8,7 +8,6 @@ type initialStateType = {
   delivery: string;
   cart: object;
   currency: string;
-  size: string;
   lastwatched: object;
 };
 
@@ -18,7 +17,6 @@ const initialState: initialStateType = {
   delivery: '0',
   cart: {},
   currency: 'cedi',
-  size: '',
   lastwatched: {}
 };
 
@@ -26,10 +24,6 @@ const slice = createSlice({
   initialState,
   name: 'cart',
   reducers: {
-    setSize(state,payload){
-      state.size = payload.payload
-    },
-
     addToCart(state, payload) {
       state.cart = { ...state.cart, ...payload.payload };
 
@@ -40,7 +34,9 @@ const slice = createSlice({
     addLastwatched(state, payload) {
       state.lastwatched = { ...state.lastwatched, ...payload.payload };
     },
-
+    deleteLastwatched(state) {
+      state.lastwatched = {};
+    },
 
     deleteCart(state, payload) {
       state.cart = { ...payload.payload };
@@ -56,4 +52,4 @@ const slice = createSlice({
 
 export default slice.reducer;
 
-export const { addToCart, deleteCart, setCurrency,setSize,addLastwatched } = slice.actions;
+export const { addToCart, deleteCart, setCurrency,addLastwatched, deleteLastwatched } = slice.actions;

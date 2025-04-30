@@ -1,5 +1,5 @@
 import { ItemTypes } from '@/@types/types';
-import { addToCart, setSize } from '@/data/redux/features';
+import { addToCart } from '@/data/redux/features';
 import useSelectors from '@/data/redux/useSelectors';
 import useGetCurrency from '@/utils/useGetCurrency';
 import { useState } from 'react';
@@ -9,6 +9,7 @@ import { LiaShippingFastSolid } from 'react-icons/lia';
 import { GiAlarmClock } from 'react-icons/gi';
 import { GiAnticlockwiseRotation } from 'react-icons/gi';
 import { RiSecurePaymentLine } from 'react-icons/ri';
+import ItemSize from './ItemSize';
 
 type galleryType =
   | {
@@ -25,7 +26,8 @@ const Gallery = ({ data }: { data: ItemTypes }) => {
 
   const slct = useSelectors();
 
-  const size = slct?.size;
+
+  const btn = Object.keys(slct.cart).includes(arr[0]?.id);
 
   const galleryArray: galleryType = arr[0]?.gallery
     ? arr[0]?.gallery
@@ -39,6 +41,7 @@ const Gallery = ({ data }: { data: ItemTypes }) => {
         img: arr[0]?.image,
         link: `/single/${arr[0]?.id}`,
         price: arr[0]?.price,
+        size: '',
       },
     };
     dispatch(addToCart(bj));
@@ -73,38 +76,19 @@ const Gallery = ({ data }: { data: ItemTypes }) => {
           {curr} {item_price}
         </h3>
 
-        <div className="sizes-btn">
-          <button
-            className={size === 'M' ? 'btn-active' : ''}
-            onClick={() => dispatch(setSize('M'))}
-          >
-            M
-          </button>
-          <button
-            className={size === 'L' ? 'btn-active' : ''}
-            onClick={() => dispatch(setSize('L'))}
-          >
-            L
-          </button>
-          <button
-            className={size === 'XL' ? 'btn-active' : ''}
-            onClick={() => dispatch(setSize('XL'))}
-          >
-            XL
-          </button>
-          <button
-            className={size === 'XXL' ? 'btn-active' : ''}
-            onClick={() => dispatch(setSize('XXL'))}
-          >
-            XXL
-          </button>
-        </div>
+   
+          <ItemSize id={arr[0]?.id} obj={slct.cart} />
+    
 
         <p>Order now, we will ship it within 24 hours!</p>
 
-        <button className="add-to-basket" onClick={handleClick}>
-          <span>Add to basket</span> <BsBasket />
-        </button>
+        {btn ? (
+          ''
+        ) : (
+          <button className="add-to-basket" onClick={handleClick}>
+            <span>Add to basket</span> <BsBasket />
+          </button>
+        )}
 
         <div className="shipping-details">
           <div>

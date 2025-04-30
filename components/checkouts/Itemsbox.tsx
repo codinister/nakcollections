@@ -7,6 +7,7 @@ import format_number from '@/utils/format_number';
 import setCurrencyType from '@/utils/setCurrencyType';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
+import ItemSize from '../ItemSize';
 
 const Itemsbox = () => {
   const obj = useSelectors();
@@ -38,6 +39,7 @@ const Itemsbox = () => {
           ...v,
           qty: calc,
           total: Number(v.price) * Number(calc),
+          size: '',
         };
       });
 
@@ -50,54 +52,53 @@ const Itemsbox = () => {
 
   return (
     <>
-    <div className="items-box" onScroll={handleScroll}>
-      <table>
-        <tbody>
-          {[...data].map((v, k) => {
-            const { curr, item_total } = setCurrencyType(obj, v.price,v.qty, cont);
+      <div className="items-box" onScroll={handleScroll}>
+        <table>
+          <tbody>
+            {[...data].map((v, k) => {
+              const { curr, item_total } = setCurrencyType(
+                obj,
+                v.price,
+                v.qty,
+                cont
+              );
 
-            return (
-              <tr key={k}>
-                <td>
-                  <div
-                    style={{
-                      backgroundImage: `url(${v?.img})`,
-                      backgroundSize: 'cover',
-                      backgroundPosition: 'top',
-                    }}
-                  >
-                    <div>{v.qty}</div>
-                  </div>
-                </td>
-                <td>
-                  <div>{v.title}</div>
-                  <div>
-                    <span>QTY</span>
-                    <input
-                      onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                        handleChange(v.id, e.currentTarget.value)
-                      }
-                      type="number"
-                    
-                    />
-                  </div>
-                </td>
-                <td>
-                  {curr} {format_number(item_total.toString())}
-                </td>
-              </tr>
-            );
-          })}
-        </tbody>
-      </table>
-      <div
-        className={`scroll-box ${
-          scrollPosition > 0 ? 'hide' : total_items > 3 ? 'show' : ''
-        }`}
-      >
-        Scroll for more items
+              return (
+                <tr key={k}>
+                  <td>
+                    <div
+                      style={{
+                        backgroundImage: `url(${v?.img})`,
+                        backgroundSize: 'cover',
+                        backgroundPosition: 'top',
+                      }}
+                    ></div>
+                  </td>
+                  <td>
+                    <div>{v.title}</div>
+                    <div>
+                      <button>-</button>1<button>+</button>
+                    </div>
+                    <div>
+                      <ItemSize id={v.id} obj={obj.cart} />
+                    </div>
+                  </td>
+                  <td>
+                    {curr} {format_number(item_total.toString())}
+                  </td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
+        <div
+          className={`scroll-box ${
+            scrollPosition > 0 ? 'hide' : total_items > 3 ? 'show' : ''
+          }`}
+        >
+          Scroll for more items
+        </div>
       </div>
-    </div>
     </>
   );
 };
